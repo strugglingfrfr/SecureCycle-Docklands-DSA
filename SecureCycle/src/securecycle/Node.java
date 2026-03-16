@@ -14,10 +14,10 @@ public class Node {
     private Node next;
 
     //constructor
-    public Node(Object element, Node next) {
-        this.element = element;
-        this.next = next;
-    }
+    public Node(Object element) {
+    this.element = element;
+    this.next = null;
+}
     
     //setters
     public void setElement(Object element) {
