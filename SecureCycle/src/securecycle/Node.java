@@ -10,4 +10,31 @@ package securecycle;
  */
 public class Node {
     
+    private Object element;
+    private Node next;
+
+    //constructor
+    public Node(Object element, Node next) {
+        this.element = element;
+        this.next = next;
+    }
+    
+    //setters
+    public void setElement(Object element) {
+        this.element = element;
+    }
+
+    public void setNext(Node next) {
+        this.next = next;
+    }
+    
+    //getters
+    public Object getElement() {
+        return element;
+    }
+
+    public Node getNext() {
+        return next;
+    }
+    
 }
