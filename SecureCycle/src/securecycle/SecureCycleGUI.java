@@ -136,8 +136,8 @@ public class SecureCycleGUI extends javax.swing.JFrame {
 
     private void btnOfficerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfficerActionPerformed
         // TODO add your handling code here:
-        //creating the officer window and passing the shared registry and alerts to it
-        OfficerGUI officerPortal = new OfficerGUI(stolenAlerts, recoveryLog);
+        //creating the officer window
+        OfficerGUI officerPortal = new OfficerGUI();
         
         //showing the officer GUI
         officerPortal.setVisible(true);
