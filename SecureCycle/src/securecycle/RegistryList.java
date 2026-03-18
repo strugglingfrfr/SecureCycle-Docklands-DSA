@@ -85,5 +85,22 @@ public class RegistryList {
         }
     }
     
+    //method to find a bike by serial and change its status  to stolen recovered etc 
+    public boolean updateStatus(String serial, String newStatus) {
+        Node temp = head; //starting at the beginning of the chain
+        
+        while (temp != null) {
+            //casting the object back to a bicycle to reach the setStatus method
+            Bicycle b = (Bicycle) temp.getElement();
+            
+            //if we find the right serial number, we update it and return true
+            if (b.getSerialNumber().equalsIgnoreCase(serial)) {
+                b.setStatus(newStatus);
+                return true; 
+            }
+            temp = temp.getNext(); //moving to the next link in the chain
+        }
+        return false; //if we loop through everything and find nothing
+    }
     
 }

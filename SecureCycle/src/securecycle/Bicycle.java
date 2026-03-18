@@ -32,12 +32,19 @@ public class Bicycle {
     public String getSerialNumber() {
         return serialNumber;
     }
+    
+    public String getOwnerName() {
+        return ownerName;
+    }
+    
+    public String getModel() {
+        return model;
+    }
 
     public String getStatus() {
         return status;
     }
-    
-    
+
     //other methods 
     @Override
     public String toString() {

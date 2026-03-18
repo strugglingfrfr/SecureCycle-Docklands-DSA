@@ -9,5 +9,6 @@ package securecycle;
  * @author muhammadhamzaanjum
  */
 public interface ISecurity {
-    
+    //Any class implementing this must be able to sound an alert
+    public String triggerAlarm();
 }

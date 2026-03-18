@@ -8,7 +8,7 @@ package securecycle;
  *
  * @author muhammadhamzaanjum
  */
-public class SmartBicycle extends Bicycle{   
+public class SmartBicycle extends Bicycle implements ISecurity, IBicycleData{   
     
     private String iotID;
     
@@ -27,6 +27,18 @@ public class SmartBicycle extends Bicycle{
     @Override
     public String toString() {
         return super.toString() + ", IoT ID: " + iotID;
+    }
+    
+    // Implementing ISecurity
+    @Override
+    public String triggerAlarm() {
+        return "ALARM! Smart ID " + iotID + " has detected unauthorized movement!";
+    }
+
+    // Implementing IBicycleData
+    @Override
+    public String getSummary() {
+        return "Smart Bike [" + serialNumber + "] - Owner: " + ownerName + " (IoT Active)";
     }
     
     

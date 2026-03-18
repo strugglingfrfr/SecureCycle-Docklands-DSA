@@ -13,6 +13,7 @@ public class SecureCycleMain {
     //static so ResidentGUI and OfficerGUI can see them easily
     public static RegistryList registry = new RegistryList();
     public static UrgentAlertStack alerts = new UrgentAlertStack();
+    public static RecoveryHistoryQueue recoveryHistory = new RecoveryHistoryQueue();
 
     /**
      * @param args the command line arguments

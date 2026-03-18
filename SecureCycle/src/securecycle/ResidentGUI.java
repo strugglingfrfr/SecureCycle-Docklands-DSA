@@ -42,7 +42,6 @@ public class ResidentGUI extends javax.swing.JFrame {
         lblSerialNo = new javax.swing.JLabel();
         lblBikeModel = new javax.swing.JLabel();
         lblSmartID = new javax.swing.JLabel();
-        lblStatus = new javax.swing.JLabel();
         txtOwner = new javax.swing.JTextField();
         txtSerialNo = new javax.swing.JTextField();
         txtBikeModel = new javax.swing.JTextField();
@@ -96,11 +95,6 @@ public class ResidentGUI extends javax.swing.JFrame {
         lblSmartID.setForeground(new java.awt.Color(0, 51, 102));
         lblSmartID.setText("Smart ID:");
 
-        lblStatus.setBackground(new java.awt.Color(204, 204, 204));
-        lblStatus.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        lblStatus.setForeground(new java.awt.Color(0, 51, 102));
-        lblStatus.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-
         tglSmart.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         tglSmart.setForeground(new java.awt.Color(0, 51, 102));
         tglSmart.setText("Enable Smart");
@@ -116,10 +110,9 @@ public class ResidentGUI extends javax.swing.JFrame {
             pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInformationLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblOwner, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSerialNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblSerialNo)
                     .addComponent(lblBikeModel, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSmartID, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(85, 85, 85)
@@ -157,9 +150,7 @@ public class ResidentGUI extends javax.swing.JFrame {
                     .addGroup(pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtSmartID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblSmartID)))
-                .addGap(32, 32, 32)
-                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         btnRegister.setBackground(new java.awt.Color(70, 130, 180));
@@ -218,16 +209,19 @@ public class ResidentGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtOutput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 20, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(txtOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnlInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
 
         pack();
@@ -258,10 +252,68 @@ public class ResidentGUI extends javax.swing.JFrame {
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
+        // getting the text from the text area
+        String serial = txtSerialNo.getText();
+        //checking to make sure the user entered teh serial number
+        if (serial.isEmpty()) {
+            txtOutput.setText("please enter the serial number to report");
+            return;
+        }
+        
+        //pushing the serial number onto our stack for the officers to see
+        SecureCycleMain.alerts.push(serial);
+
+        //logic to find the bike in the list and update its status
+        //using the update method in the registry class
+        boolean found = SecureCycleMain.registry.updateStatus(serial, "stolen");
+
+        if (found) {
+            txtOutput.setText("bike " + serial + " has been reported as stolen");
+        } else {
+            txtOutput.setText("serial number not found in our records");
+        }
+
+        // clearing the box
+        txtSerialNo.setText("");
     }//GEN-LAST:event_btnReportActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
+        // getting the text from the text areas
+        String owner = txtOwner.getText();
+        String serial = txtSerialNo.getText();
+        String model = txtBikeModel.getText();
+
+        //checking to make sure the user filled  all fields
+        if (owner.isEmpty() || serial.isEmpty() || model.isEmpty()) {
+            txtOutput.setText("please fill in all the basic fields first");
+            return;
+        }
+
+        Bicycle newBike;
+        
+        //checking if we are making a smart bike or just a regular one
+        if (tglSmart.isSelected()) {
+            String smartID = txtSmartID.getText();
+            //making the smart bike object 
+            // adding "registered" as the status because we don't have a status input in this gui
+            newBike = new SmartBicycle(serial, owner, model, "Registered", smartID);
+            txtOutput.setText("smart bike registered successfully");
+        } else {
+            //just making a standard bike object here
+            //again adding "registered" as the status because we don't have a status input in this gui
+            newBike = new Bicycle(serial, owner, model, "Registered");
+            txtOutput.setText("standard bike registered successfully");
+        }
+        
+        //sending our bike to the list in the main file
+        SecureCycleMain.registry.add(newBike);
+
+        //clearing the boxes so it looks clean for the next entry
+        txtOwner.setText("");
+        txtSerialNo.setText("");
+        txtBikeModel.setText("");
+        txtSmartID.setText("");
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
@@ -298,7 +350,6 @@ public class ResidentGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblOwner;
     private javax.swing.JLabel lblSerialNo;
     private javax.swing.JLabel lblSmartID;
-    private javax.swing.JLabel lblStatus;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlInformation;
     private javax.swing.JToggleButton tglSmart;

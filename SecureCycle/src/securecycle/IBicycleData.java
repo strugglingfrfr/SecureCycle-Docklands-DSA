@@ -9,5 +9,6 @@ package securecycle;
  * @author muhammadhamzaanjum
  */
 public interface IBicycleData {
-    
+    //This ensures we can always get a formatted summary of a bike
+    public String getSummary();
 }

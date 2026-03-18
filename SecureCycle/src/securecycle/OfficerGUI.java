@@ -32,7 +32,7 @@ public class OfficerGUI extends javax.swing.JFrame {
         lblHeading = new javax.swing.JLabel();
         pnlSearch = new javax.swing.JPanel();
         lblSerial = new javax.swing.JLabel();
-        txtSearch = new javax.swing.JTextField();
+        txtSerial = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         btnFound = new javax.swing.JButton();
         txtMainOutput = new javax.swing.JTextField();
@@ -40,6 +40,7 @@ public class OfficerGUI extends javax.swing.JFrame {
         btnRefresh1 = new javax.swing.JButton();
         pnlAlerts = new javax.swing.JScrollPane();
         txtAlerts = new javax.swing.JTextArea();
+        btnHistory = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,11 +78,21 @@ public class OfficerGUI extends javax.swing.JFrame {
         btnSearch.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         btnSearch.setForeground(new java.awt.Color(255, 255, 255));
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         btnFound.setBackground(new java.awt.Color(70, 130, 180));
         btnFound.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         btnFound.setForeground(new java.awt.Color(255, 255, 255));
         btnFound.setText("Found");
+        btnFound.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFoundActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlSearchLayout = new javax.swing.GroupLayout(pnlSearch);
         pnlSearch.setLayout(pnlSearchLayout);
@@ -93,7 +104,7 @@ public class OfficerGUI extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addComponent(lblSerial)
                         .addGap(18, 18, 18)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtSerial, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlSearchLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -107,7 +118,7 @@ public class OfficerGUI extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSerial, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                    .addComponent(txtSerial, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,11 +142,26 @@ public class OfficerGUI extends javax.swing.JFrame {
         btnRefresh1.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         btnRefresh1.setForeground(new java.awt.Color(255, 255, 255));
         btnRefresh1.setText("Refresh");
+        btnRefresh1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefresh1ActionPerformed(evt);
+            }
+        });
 
         txtAlerts.setColumns(20);
         txtAlerts.setRows(5);
         txtAlerts.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 102), 2), "Alerts", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 0, 13), new java.awt.Color(0, 51, 102))); // NOI18N
         pnlAlerts.setViewportView(txtAlerts);
+
+        btnHistory.setBackground(new java.awt.Color(70, 130, 180));
+        btnHistory.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        btnHistory.setForeground(new java.awt.Color(255, 255, 255));
+        btnHistory.setText("View History");
+        btnHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistoryActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,39 +169,44 @@ public class OfficerGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMainOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMainOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnRefresh1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(pnlAlerts, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(pnlAlerts, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 12, Short.MAX_VALUE)
-                        .addComponent(pnlAlerts, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRefresh1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(txtMainOutput)))
-                .addGap(26, 26, 26))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(txtMainOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(pnlAlerts)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRefresh1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -188,6 +219,90 @@ public class OfficerGUI extends javax.swing.JFrame {
         //close this gui
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        //getting the serial the officer is looking for
+        String serial = txtSerial.getText();
+
+        //calling our search method from the linked list
+        Bicycle found = SecureCycleMain.registry.search(serial);
+
+        if (found != null) {
+            //if found, showing all the details in the big text area
+            txtMainOutput.setText("--- bike details ---\n"
+                    + "owner: " + found.getOwnerName() + "\n"
+                    + "model: " + found.getModel() + "\n"
+                    + "status: " + found.getStatus());
+        } else {
+            txtMainOutput.setText("no bike found with serial: " + serial);
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnRefresh1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefresh1ActionPerformed
+        // TODO add your handling code here:
+        // clearing the alert box first
+        txtAlerts.setText("");
+
+        if (SecureCycleMain.alerts.isEmpty()) {
+            txtAlerts.setText("no urgent alerts.");
+            return;
+        }
+
+        //showing the most recent stolen report i.e the top of the stack
+        //adding (String) to cast the object so java knows it's text
+        String topAlert = (String) SecureCycleMain.alerts.peek();
+        txtAlerts.setText("URGENT: " + topAlert);
+    }//GEN-LAST:event_btnRefresh1ActionPerformed
+
+    private void btnFoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFoundActionPerformed
+        // TODO add your handling code here:
+        //getting the serial number from the top of the stack i.e  the most recent alert
+        if (SecureCycleMain.alerts.isEmpty()) {
+            txtMainOutput.setText("No active alerts to clear.");
+            return;
+        }
+
+        //pop the serial number off the stack because it's being handled
+        String foundSerial = (String) SecureCycleMain.alerts.pop();
+
+        //updating the status in the Registry linked list
+        SecureCycleMain.registry.updateStatus(foundSerial, "Registered");
+
+        //adding to the queue
+        //adding a string message to the back of the queue just a s a nice touch with the date
+        String historyEntry = "Bike " + foundSerial + " recovered on " + new java.util.Date();
+        SecureCycleMain.recoveryHistory.enqueue(historyEntry);
+
+        //updating the text area
+        txtMainOutput.setText("SUCCESS: Bike " + foundSerial + " marked as found.\n"
+                + "Alert removed from stack.\n"
+                + "Record added to recovery history.");
+
+        //clearing the small alert box too
+        txtAlerts.setText("");
+
+    }//GEN-LAST:event_btnFoundActionPerformed
+
+    private void btnHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoryActionPerformed
+        // TODO add your handling code here:
+        //checking if we actually have any history
+        if (SecureCycleMain.recoveryHistory.isEmpty()) {
+            txtMainOutput.setText("recovery history is empty. no bikes found yet.");
+            return;
+        }
+
+        //clearing the output area to show the history 
+        txtMainOutput.setText("--- recovery history (oldest first) ---\n");
+
+        //using a loop to dequeue everything and print it
+        //dequeue removes items, so this acts like 'clearing' the log as the user reads it
+        while (!SecureCycleMain.recoveryHistory.isEmpty()) {
+            //casting to String because queue returns object
+            String record = (String) SecureCycleMain.recoveryHistory.dequeue();
+            txtMainOutput.setText(txtMainOutput.getText() + record + "\n");
+        }
+    }//GEN-LAST:event_btnHistoryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,6 +332,7 @@ public class OfficerGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnFound;
+    private javax.swing.JButton btnHistory;
     private javax.swing.JButton btnRefresh1;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel lblHeading;
@@ -226,6 +342,6 @@ public class OfficerGUI extends javax.swing.JFrame {
     private javax.swing.JPanel pnlSearch;
     private javax.swing.JTextArea txtAlerts;
     private javax.swing.JTextField txtMainOutput;
-    private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextField txtSerial;
     // End of variables declaration//GEN-END:variables
 }
