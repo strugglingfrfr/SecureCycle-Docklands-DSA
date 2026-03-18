@@ -10,13 +10,20 @@ package securecycle;
  */
 public class ResidentGUI extends javax.swing.JFrame {
     
+    //these hold the data we get from the Main Gui
+    private RegistryList registry;
+    private UrgentAlertStack alerts;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ResidentGUI.class.getName());
 
     /**
      * Creates new form ResidentGUI
      */
-    public ResidentGUI() {
+    public ResidentGUI( ) {
         initComponents();
+    
+        //hiding the Smart ID box until the toggle is clicked
+        txtSmartID.setEnabled(false);
     }
 
     /**
@@ -28,21 +35,234 @@ public class ResidentGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlHeader = new javax.swing.JPanel();
+        lblHeading = new javax.swing.JLabel();
+        pnlInformation = new javax.swing.JPanel();
+        lblOwner = new javax.swing.JLabel();
+        lblSerialNo = new javax.swing.JLabel();
+        lblBikeModel = new javax.swing.JLabel();
+        lblSmartID = new javax.swing.JLabel();
+        lblStatus = new javax.swing.JLabel();
+        txtOwner = new javax.swing.JTextField();
+        txtSerialNo = new javax.swing.JTextField();
+        txtBikeModel = new javax.swing.JTextField();
+        txtSmartID = new javax.swing.JTextField();
+        tglSmart = new javax.swing.JToggleButton();
+        btnRegister = new javax.swing.JButton();
+        btnReport = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        txtOutput = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        pnlHeader.setBackground(new java.awt.Color(0, 51, 102));
+
+        lblHeading.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
+        lblHeading.setForeground(new java.awt.Color(255, 255, 255));
+        lblHeading.setText("RESIDENT BIKE REGISTRY");
+
+        javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
+        pnlHeader.setLayout(pnlHeaderLayout);
+        pnlHeaderLayout.setHorizontalGroup(
+            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(lblHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnlHeaderLayout.setVerticalGroup(
+            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblHeading, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        pnlInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bike Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Black", 1, 14), new java.awt.Color(0, 51, 102))); // NOI18N
+
+        lblOwner.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        lblOwner.setForeground(new java.awt.Color(0, 51, 102));
+        lblOwner.setText("Owner Name:");
+
+        lblSerialNo.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        lblSerialNo.setForeground(new java.awt.Color(0, 51, 102));
+        lblSerialNo.setText("Serial Number:");
+
+        lblBikeModel.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        lblBikeModel.setForeground(new java.awt.Color(0, 51, 102));
+        lblBikeModel.setText("Bike Model:");
+
+        lblSmartID.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        lblSmartID.setForeground(new java.awt.Color(0, 51, 102));
+        lblSmartID.setText("Smart ID:");
+
+        lblStatus.setBackground(new java.awt.Color(204, 204, 204));
+        lblStatus.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        lblStatus.setForeground(new java.awt.Color(0, 51, 102));
+        lblStatus.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        tglSmart.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        tglSmart.setForeground(new java.awt.Color(0, 51, 102));
+        tglSmart.setText("Enable Smart");
+        tglSmart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tglSmartActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlInformationLayout = new javax.swing.GroupLayout(pnlInformation);
+        pnlInformation.setLayout(pnlInformationLayout);
+        pnlInformationLayout.setHorizontalGroup(
+            pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInformationLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblOwner, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSerialNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblBikeModel, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSmartID, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(85, 85, 85)
+                .addGroup(pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtOwner)
+                    .addComponent(txtSerialNo)
+                    .addComponent(txtBikeModel)
+                    .addComponent(txtSmartID, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInformationLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tglSmart)
+                .addGap(7, 7, 7))
+        );
+        pnlInformationLayout.setVerticalGroup(
+            pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInformationLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlInformationLayout.createSequentialGroup()
+                        .addGroup(pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblOwner)
+                            .addComponent(txtOwner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblSerialNo)
+                            .addComponent(txtSerialNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblBikeModel)
+                            .addComponent(txtBikeModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
+                        .addComponent(tglSmart, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))
+                    .addGroup(pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtSmartID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblSmartID)))
+                .addGap(32, 32, 32)
+                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        btnRegister.setBackground(new java.awt.Color(70, 130, 180));
+        btnRegister.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+
+        btnReport.setBackground(new java.awt.Color(70, 130, 180));
+        btnReport.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        btnReport.setForeground(new java.awt.Color(255, 255, 255));
+        btnReport.setText("Report");
+        btnReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportActionPerformed(evt);
+            }
+        });
+
+        btnBack.setBackground(new java.awt.Color(70, 130, 180));
+        btnBack.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        txtOutput.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        txtOutput.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtOutput)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtOutput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tglSmartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglSmartActionPerformed
+        // TODO add your handling code here:
+        //showing the smart id button  and outputting the appropriate text when the toggle is triggered and vice versa
+        if (tglSmart.isSelected()) {
+        txtSmartID.setEnabled(true);
+        tglSmart.setText("Disable Smart Features");
+        txtOutput.setText("Smart Features Enabled. Please enter Smart ID.");
+    } else {
+        txtSmartID.setEnabled(false);
+        txtSmartID.setText(""); // Clear field if disabled
+        tglSmart.setText("Enable Smart");
+        txtOutput.setText("Standard Bike mode selected.");
+    }
+    }//GEN-LAST:event_tglSmartActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        //open and go back to the main menu again
+        new SecureCycleGUI().setVisible(true);
+        //close this gui
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportActionPerformed
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +290,22 @@ public class ResidentGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnRegister;
+    private javax.swing.JButton btnReport;
+    private javax.swing.JLabel lblBikeModel;
+    private javax.swing.JLabel lblHeading;
+    private javax.swing.JLabel lblOwner;
+    private javax.swing.JLabel lblSerialNo;
+    private javax.swing.JLabel lblSmartID;
+    private javax.swing.JLabel lblStatus;
+    private javax.swing.JPanel pnlHeader;
+    private javax.swing.JPanel pnlInformation;
+    private javax.swing.JToggleButton tglSmart;
+    private javax.swing.JTextField txtBikeModel;
+    private javax.swing.JTextField txtOutput;
+    private javax.swing.JTextField txtOwner;
+    private javax.swing.JTextField txtSerialNo;
+    private javax.swing.JTextField txtSmartID;
     // End of variables declaration//GEN-END:variables
 }
